@@ -1,0 +1,116 @@
+﻿<Window x:Class="TextEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextEditor"
+        mc:Ignorable="d"
+        Title="TextEditor" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Command="ApplicationCommands.Open" ToolTip="Otwórz">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\folder_page.png" Width="16" Height="16" />
+            </Button>
+            <Button Command="ApplicationCommands.Save" ToolTip="Zapisz jako">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\page_save.png" Width="16" Height="16" />
+            </Button>
+            <Separator MinWidth="2" />
+            <Button Command="ApplicationCommands.Cut" ToolTip="Wytnij">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\cut_red.png" Width="16" Height="16" />
+            </Button>
+            <Button Command="ApplicationCommands.Copy" ToolTip="Kopiuj">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\page_copy.png" Width="16" Height="16" />
+            </Button>
+            <Button Command="ApplicationCommands.Paste" ToolTip="Wklej">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\paste_plain.png" Width="16" Height="16" />
+            </Button>
+            <Separator MinWidth="2" />
+            <Button Command="ApplicationCommands.Undo" ToolTip="Cofnij">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\arrow_undo.png" Width="16" Height="16" />
+            </Button>
+            <Button Command="ApplicationCommands.Redo" ToolTip="Ponów">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\arrow_redo.png" Width="16" Height="16" />
+            </Button>
+        </ToolBar>
+        <ToolBar DockPanel.Dock="Top">
+            <ToggleButton Command="EditingCommands.ToggleBold" Name="boldBTN" ToolTip="Pogrubienie">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_bold.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleItalic" Name="italicBTN" ToolTip="Kursywa">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_italic.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleUnderline" Name="underlineBTN" ToolTip="Podreślenie">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_underline.png" Width="16" Height="16" />
+            </ToggleButton>
+            <Separator MinWidth="2" />
+            <ToggleButton Command="EditingCommands.ToggleBullets" Name="bulletsBTN" ToolTip="Punktor">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_list_bullets.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleNumbering" Name="numberingBTN" ToolTip="Numerowanie">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_list_numbers.png" Width="16" Height="16" />
+            </ToggleButton>
+            <Separator MinWidth="2" />
+            <ToggleButton Command="EditingCommands.AlignJustify" Name="justifyBTN" Checked="justifyBTN_Checked" ToolTip="Justuj">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_align_justify.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.AlignLeft" Name="leftBTN" Checked="leftBTN_Checked" ToolTip="Wyrównaj do lewej">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_align_left.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.AlignCenter" Name="centerBTN" Checked="centerBTN_Checked" ToolTip="Wyrównaj do środka">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_align_center.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.AlignRight" Name="rightBTN" Checked="rightBTN_Checked" ToolTip="Wyrównaj do prawej">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\text_align_right.png" Width="16" Height="16" />
+            </ToggleButton>
+            <Separator MinWidth="2" />
+            <Button x:Name="fontColorBTN" Click="fontColorBTN_Click" ToolTip="Kolor tekstu">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\palette.png" Width="16" Height="16" />
+            </Button>
+            <Button x:Name="fontBackgroundColorBTN" ToolTip="Kolor tła tekstu" Click="fontBackgroundColorBTN_Click">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\script_palette.png" Width="16" Height="16" />
+            </Button>
+            <Button x:Name="imageBTN" Click="imageBTN_Click" ToolTip="Wstaw obrazek">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\picture.png" Width="16" Height="16" />
+            </Button>
+            <Separator MinWidth="2" />
+            <ComboBox Name="fontFamilyCB" Width="150" SelectionChanged="fontFamilyCB_SelectionChanged" />
+            <ComboBox Name="fontSizeCB" Width="50" IsEditable="True" TextBoxBase.TextChanged="fontSizeCB_TextChanged" />
+            <Separator MinWidth="2" />
+            <Button x:Name="dataBTN" ToolTip="Wstaw date" Click="dataBTN_Click">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\date.png" Width="16" Height="16" />
+            </Button>
+            <Button x:Name="czasBTN" ToolTip="Wstaw czas" Click="czasBTN_Click" >
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\time.png" Width="16" Height="16" />
+            </Button>
+            <Separator MinWidth="2" />
+            <Button x:Name="szukajBTN" ToolTip="Znajdź..." Click="szukajBTN_Click"  >
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\find.png" Width="16" Height="16" />
+            </Button>
+            <TextBox x:Name="szukajSlowoTB" Width="90" ToolTip="Wprowadź tekst do wyszukania" GotKeyboardFocus="szukajSlowoTB_GotKeyboardFocus" Margin="0"/>
+        </ToolBar>
+        <DockPanel DockPanel.Dock="Bottom">
+            <Label Name="ileZnakowLBL" Content="Znaki: 0; Słowa: 0" Height="25"/>
+            <Button x:Name="slowaBTN" Click="slowaBTN_Click" BorderBrush="Transparent" Background="Transparent" ToolTip="Licz zaznaczoną zawartość tekstu">
+                <Image Source="D:\Programy Visual Studio\TextEditor\icons\book_previous.png" Width="16" Height="16" Margin="1"/>
+            </Button>
+            <Label Name="ileZnalezioneLBL" FontSize="12" Margin="20,0,0,0"></Label>
+            <TextBox Text="{Binding ElementName=skalaRTB, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" DockPanel.Dock="Right" Width="30" Margin="0,0,10,0" Height="20" />
+            <Image Source="D:\Programy Visual Studio\TextEditor\icons\zoom.png" Width="16" Height="16" DockPanel.Dock="Right" Margin="0,0,7,0"/>
+            <Slider x:Name="skalaRTB" DockPanel.Dock="Bottom" Minimum="0.50" Maximum="9.99" TickPlacement="BottomRight" HorizontalAlignment="Right" Width="147" Margin="0,0,2,0" Value="1" />
+        </DockPanel>
+        <RichTextBox Name="editorRTB" SelectionChanged="editorRTB_SelectionChanged" BorderBrush="#FF52C6F1" BorderThickness="2" >
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0" />
+                </Style>
+            </RichTextBox.Resources>
+            <RichTextBox.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ElementName=skalaRTB, Path=Value}" ScaleY="{Binding ElementName=skalaRTB, Path=Value}"/>
+            </RichTextBox.LayoutTransform>
+        </RichTextBox>
+    </DockPanel>
+</Window>
